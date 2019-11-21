@@ -25,8 +25,7 @@ def create_keyboard(words=None, width=1, isOneTime=False, isPhone=False):
         keyboard.add(types.KeyboardButton(text=word, request_contact=isPhone))
     return keyboard
 
-menu = ['Adress', 'Contacts', 'Questions']
-questions = ['На какие цели могу я получить кредит?', 'Что такое Интернет-банк?', 'С какого возраста можно открыть депозит?', 'Сколько стоить открыть кредит?', 'Могу ли получить арендное жильё?', 'Почему мне выгодно открыть депозит жилищных-строительных сбережений?', 'Ск']
+menu = ['Adress', 'Contacts', 'Menu']
 
 @bot.message_handler(content_types=['text'])
 def send_message(msg):
@@ -36,7 +35,7 @@ def send_message(msg):
         bot.send_location(chat_id=cid, latitude=43.219141, longitude=76.846924)
     elif content == 'Contacts':
         bot.send_message(chat_id=cid, text='+7 800 080-18-80')
-    elif content == 'Questions':
+    elif content == 'Menu':
         bot.send_message(chat_id=cid, text='Hello world')
 
 
