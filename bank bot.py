@@ -65,6 +65,7 @@ def callback_inline(call):
             bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='7')
         elif call.data == "8s":
             bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='8')
+    
 
 
 menu = ['Adress', 'Contacts', 'Questions']
