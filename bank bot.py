@@ -55,7 +55,14 @@ def inline():
     but6 = types.InlineKeyboardButton(FAQ[CallBackButtonStroyHata], callback_data='CallBackButtonStroyHata')
     but7 = types.InlineKeyboardButton(FAQ[CallBackButtonKopilka], callback_data='CallBackButtonKopilka')
     but8 = types.InlineKeyboardButton(FAQ[CallBackButtonKupluGarazh], callback_data='CallBackButtonKupluGarazh')  
-    keyb.add(but1, but2, but3, but4, but5, but6, but7, but8)  
+    keyb.add(but1) 
+    keyb.add(but2)
+    keyb.add(but3)
+    keyb.add(but4)
+    keyb.add(but5)
+    keyb.add(but6)
+    keyb.add(but7)
+    keyb.add(but8) 
     return keyb
     
 #бля 4 утра я тебе завтра кароч объясню что к чему, сорян
