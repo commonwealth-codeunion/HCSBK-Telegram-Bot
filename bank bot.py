@@ -9,25 +9,6 @@ data = requests.get(linkval)
 slovar = data.json()
 valuty = slovar['rates']
 
-CallBackButtonCredit = 'callbackbuttoncredit'
-CallBackButtonIntBank = 'callbackbuttonintbank'
-CallBackButtonDepozit = 'callbackbuttondepozit'
-CallBackButtonKredit = 'callbackbuttonkredit'
-CallBackButtonHata = 'callbackbuttonhata'
-CallBackButtonStroyHata = 'callbackbuttonstroyhata'
-CallBackButtonKopilka = 'callbackbuttonkopilka'
-CallBackButtonKupluGarazh = 'callbackbuttonkuplugarazh'
-
-FAQ = {
-    CallBackButtonCredit:'На какие цели могу я получить кредит?',
-    CallBackButtonIntBank:'Что такое Интернет-банк?',
-    CallBackButtonDepozit:'С какого возраста можно открыть депозит?',
-    CallBackButtonKredit:'Сколько стоит открыть кредит?',
-    CallBackButtonHata:'Могу ли получить арендное жильё?',
-    CallBackButtonStroyHata:'Почему мне выгодно открыть депозит жилищных-строительных сбережений?',
-    CallBackButtonKopilka:'Сколько я должен накопить чтобы приобрести жильё?',
-    CallBackButtonKupluGarazh:'Как я могу приобрести жильё?'}
-
 token = '1061153932:AAFPiMBR-bpTtqAHkz_dA4sTvsS-ktgUWQ4'
 
 bot = telebot.TeleBot(token)
@@ -46,31 +27,48 @@ def create_keyboard(words=None, width=1, isOneTime=False, isPhone=False):
 
 #@bot.message_handler(content_types=['text'])
 def inline(): 
-    keyb = types.InlineKeyboardMarkup()
-    but1 = types.InlineKeyboardButton(FAQ[CallBackButtonCredit], callback_data='CallBackButtonCredit')
-    but2 = types.InlineKeyboardButton(FAQ[CallBackButtonIntBank], callback_data='CallBackButtonIntBank')
-    but3 = types.InlineKeyboardButton(FAQ[CallBackButtonDepozit], callback_data='CallBackButtonDepozit')
-    but4 = types.InlineKeyboardButton(FAQ[CallBackButtonKredit], callback_data='CallBackButtonKredit')
-    but5 = types.InlineKeyboardButton(FAQ[CallBackButtonHata], callback_data='CallBackButtonHata')
-    but6 = types.InlineKeyboardButton(FAQ[CallBackButtonStroyHata], callback_data='CallBackButtonStroyHata')
-    but7 = types.InlineKeyboardButton(FAQ[CallBackButtonKopilka], callback_data='CallBackButtonKopilka')
-    but8 = types.InlineKeyboardButton(FAQ[CallBackButtonKupluGarazh], callback_data='CallBackButtonKupluGarazh')  
-    keyb.add(but1) 
+    keyb = types.InlineKeyboardMarkup(8)
+    but1 = types.InlineKeyboardButton('1', callback_data='1s')
+    but2 = types.InlineKeyboardButton('2', callback_data='2s')
+    but3 = types.InlineKeyboardButton('3', callback_data='3s')
+    but4 = types.InlineKeyboardButton('4', callback_data='4s')
+    but5 = types.InlineKeyboardButton('5', callback_data='5s')
+    but6 = types.InlineKeyboardButton('6', callback_data='6s')
+    but7 = types.InlineKeyboardButton('7', callback_data='7s')
+    but8 = types.InlineKeyboardButton('8', callback_data='8s')  
+    keyb.add(but1)    
     keyb.add(but2)
     keyb.add(but3)
     keyb.add(but4)
     keyb.add(but5)
     keyb.add(but6)
     keyb.add(but7)
-    keyb.add(but8) 
+    keyb.add(but8)   
     return keyb
-    
-#бля 4 утра я тебе завтра кароч объясню что к чему, сорян
-#я тип сделал менюшку эту, но ее нужно красиво сделать и ещё чтобы ответы давала
+
+@bot.callback_query_handler(func=lambda call: True)
+def callback_inline(call):
+    if call.message:
+        if call.data == "1s":
+            bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='1')
+        elif call.data == "2s":
+            bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='2')
+        elif call.data == "3s":
+            bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='3')
+        elif call.data == "4s":
+            bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='4')
+        elif call.data == "5s":
+            bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='5')
+        elif call.data == "6s":
+            bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='6')
+        elif call.data == "7s":
+            bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='7')
+        elif call.data == "8s":
+            bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='8')
 
 
 menu = ['Adress', 'Contacts', 'Questions']
-questions = ['На какие цели могу я получить кредит?', 'Что такое Интернет-банк?', 'С какого возраста можно открыть депозит?', 'Сколько стоит открыть кредит?', 'Могу ли получить арендное жильё?', 'Почему мне выгодно открыть депозит жилищных-строительных сбережений?', 'Сколько я должен накопить чтобы приобрести жильё?', 'Как я могу приобрести жильё?']
+#questions = ['На какие цели могу я получить кредит?', 'Что такое Интернет-банк?', 'С какого возраста можно открыть депозит?', 'Сколько стоит открыть кредит?', 'Могу ли получить арендное жильё?', 'Почему мне выгодно открыть депозит жилищных-строительных сбережений?', 'Сколько я должен накопить чтобы приобрести жильё?', 'Как я могу приобрести жильё?']
 
 @bot.message_handler(content_types=['text'])
 def send_message1(msg):
@@ -81,7 +79,7 @@ def send_message1(msg):
     elif content == 'Contacts':
         bot.send_message(chat_id=cid, text='+7 800 080-18-80')
     elif content == 'Questions': 
-        bot.send_message(chat_id=cid, text='Выберите интерисующий вопрос: ', reply_markup=inline())      
+        bot.send_message(chat_id=cid, text='Выберите интерисующий вопрос:\n'+'1.На какие цели могу я получить кредит?\n'+'2.Что такое Интернет-банк?\n'+'3.С какого возраста можно открыть депозит?\n'+'4.Сколько стоит открыть кредит?\n'+'5.Могу ли получить арендное жильё?\n'+'6.Почему мне выгодно открыть депозит жилищных-строительных сбережений?\n'+'7.Сколько я должен накопить чтобы приобрести жильё?\n'+'8.Как я могу приобрести жильё?', reply_markup=inline())      
 
 
 
