@@ -68,7 +68,7 @@ def callback_inline(call):
     
 
 
-menu = ['Adress', 'Contacts', 'Questions']
+menu = ['Отделения в городе', 'Контакты', 'Частые вопросы']
 
 
 
@@ -76,11 +76,20 @@ menu = ['Adress', 'Contacts', 'Questions']
 def send_message1(msg):
     cid = msg.chat.id
     content = msg.text
-    if content == 'Adress':
-        bot.send_location(chat_id=cid, latitude=43.219141, longitude=76.846924)
-    elif content == 'Contacts':
-        bot.send_message(chat_id=cid, text='+7 800 080-18-80')
-    elif content == 'Questions': 
+    if content == 'Отделения в городе':
+        bot.send_message(chat_id=cid, text='Центральный аппарат АО "Жилстройсбербанк Казахстана"\nРеспублика Казахстан, г. Алматы, пр-т. Абылай хана, 91\nhttps://go.2gis.com/20uzt')
+        bot.send_location(chat_id=cid, latitude=43.255660, longitude=76.948611)
+        bot.send_message(chat_id=cid, text='Отеделение банка,\nРеспублика Казахсанг, .Алматы, пр-т. Сейфуллина, 498\nhttps://go.2gis.com/9fxva')
+        bot.send_location(chat_id=cid, latitude=43.235546, longitude=76.981677)
+        bot.send_message(chat_id=cid, text='Отеделение банка,\nРеспублика Казахсан, г.Алматы, ул. Шевченко, 155/6\nhttps://go.2gis.com/pr0nl2')
+        bot.send_location(chat_id=cid, latitude=43.2437411, longitude=76.8999463)
+        bot.send_message(chat_id=cid, text='Отеделение банка,\nРеспублика Казахсан, г.Алматы, мкр. Жетысу-2, 70Б\nhttps://go.2gis.com/stnlt')
+        bot.send_location(chat_id=cid, latitude=43.219273, longitude=76.846908)
+        bot.send_message(chat_id=cid, text='Отеделение банка,\nРеспублика Казахсан, г.Алматы, ул. Тулебаева, 15/18А\nhttps://go.2gis.com/11pte')
+        bot.send_location(chat_id=cid, latitude=43.26699, longitude=76.946132)
+    elif content == 'Контакты':
+        bot.send_message(chat_id=cid, text='+77273309300\nCall-centre: 300')
+    elif content == 'Частые вопросы': 
         bot.send_message(chat_id=cid, text='Выберите интерисующий вопрос:\n'+'1.Что такое Интернет-банк?\n'+'2.На какие цели могу я получить кредит?\n'+'3.С какого возраста можно открыть депозит?\n'+'4.Сколько стоит открыть кредит?\n'+'5.Могу ли получить арендное жильё?\n'+'6.Почему мне выгодно открыть депозит жилищных-строительных сбережений?\n'+'7.Сколько я должен накопить чтобы приобрести жильё?\n'+'8.Как я могу приобрести жильё?', reply_markup=inline())
 
 
