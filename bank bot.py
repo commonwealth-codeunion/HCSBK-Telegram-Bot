@@ -15,9 +15,8 @@ bot = telebot.TeleBot(token)
 
 @bot.message_handler(commands=['start'])
 def send_message(msg):
-    name = msg.chat.first_name
     cid = msg.chat.id
-    bot.send_message(chat_id=cid, text='Hello, '+name, reply_markup=create_keyboard(menu))
+    bot.send_message(chat_id=cid, text='Здравствтуйте!', reply_markup=create_keyboard(menu))
 
 def create_keyboard(words=None, width=1, isOneTime=False, isPhone=False):
     keyboard = types.ReplyKeyboardMarkup(one_time_keyboard=isOneTime, row_width=width, resize_keyboard = True)
@@ -68,29 +67,47 @@ def callback_inline(call):
     
 
 
+<<<<<<< HEAD
 menu = ['Отделения в городе', 'Контакты', 'Частые вопросы', 'Самое важное']
+=======
+menu = ['Адреса и графики работ отделений', 'Контакты', 'Частые вопросы']
+adress = ['Центральный аппарат | пр-т. Абылай хана, 91', 'пр-т. Сейфуллина, 498', 'ул. Шевченко, 155/6', 'мкр. Жетысу-2, 70Б', 'ул. Тулебаева, 15/18А']
+>>>>>>> d373e450325f02b9436bf5df467661e8c8ab8f79
 
+
+
+def send_adress1(msg):
+    cid = msg.chat.id
+    content = msg.text
+    if content == 'Центральный аппарат | пр-т. Абылай хана, 91':
+        bot.send_message(chat_id=cid, text='Центральный аппарат "Жилстройсбербанк Казахстана"\n\nг. Алматы, пр-т. Абылай хана, 91\nhttps://go.2gis.com/20uzt\n\nГрафик работы:\nбудние дни: 09:00 - 18:00')
+        bot.send_location(chat_id=cid, latitude=43.255660, longitude=76.948611)
+    elif content == 'пр-т. Сейфуллина, 498':
+        bot.send_message(chat_id=cid, text='Отеделение банка,\n\nРеспублика Казахсанг, .Алматы, пр-т. Сейфуллина, 498\nhttps://go.2gis.com/9fxva\n\nГрафик работы:\nбудние дни: 09:00 - 18:00')
+        bot.send_location(chat_id=cid, latitude=43.235546, longitude=76.981677)
+    elif content == 'ул. Шевченко, 155/6':
+        bot.send_message(chat_id=cid, text='Отеделение банка,\n\nРеспублика Казахсан, г.Алматы, ул. Шевченко, 155/6\nhttps://go.2gis.com/pr0nl2\n\nГрафик работы:\nбудние дни: 09:00 - 18:00')
+        bot.send_location(chat_id=cid, latitude=43.2437411, longitude=76.8999463)
+    elif content == 'мкр. Жетысу-2, 70Б':
+        bot.send_message(chat_id=cid, text='Отеделение банка,\n\nРеспублика Казахсан, г.Алматы, мкр. Жетысу-2, 70Б\nhttps://go.2gis.com/stnlt\n\nГрафик работы:\nбудние дни: 09:00 - 18:00')
+        bot.send_location(chat_id=cid, latitude=43.219273, longitude=76.846908)
+    elif content == 'ул. Тулебаева, 15/18А':
+        bot.send_message(chat_id=cid, text='Отеделение банка,\n\nРеспублика Казахсан, г.Алматы, ул. Тулебаева, 15/18А\nhttps://go.2gis.com/11pte\n\nГрафик работы:\nбудние дни: 09:00 - 18:00')
+        bot.send_location(chat_id=cid, latitude=43.26699, longitude=76.946132)
 
 
 @bot.message_handler(content_types=['text'])
 def send_message1(msg):
     cid = msg.chat.id
     content = msg.text
-    if content == 'Отделения в городе':
-        bot.send_message(chat_id=cid, text='Центральный аппарат АО "Жилстройсбербанк Казахстана"\nРеспублика Казахстан, г. Алматы, пр-т. Абылай хана, 91\nhttps://go.2gis.com/20uzt')
-        bot.send_location(chat_id=cid, latitude=43.255660, longitude=76.948611)
-        bot.send_message(chat_id=cid, text='Отеделение банка,\nРеспублика Казахсанг, .Алматы, пр-т. Сейфуллина, 498\nhttps://go.2gis.com/9fxva')
-        bot.send_location(chat_id=cid, latitude=43.235546, longitude=76.981677)
-        bot.send_message(chat_id=cid, text='Отеделение банка,\nРеспублика Казахсан, г.Алматы, ул. Шевченко, 155/6\nhttps://go.2gis.com/pr0nl2')
-        bot.send_location(chat_id=cid, latitude=43.2437411, longitude=76.8999463)
-        bot.send_message(chat_id=cid, text='Отеделение банка,\nРеспублика Казахсан, г.Алматы, мкр. Жетысу-2, 70Б\nhttps://go.2gis.com/stnlt')
-        bot.send_location(chat_id=cid, latitude=43.219273, longitude=76.846908)
-        bot.send_message(chat_id=cid, text='Отеделение банка,\nРеспублика Казахсан, г.Алматы, ул. Тулебаева, 15/18А\nhttps://go.2gis.com/11pte')
-        bot.send_location(chat_id=cid, latitude=43.26699, longitude=76.946132)
+    send_adress1(msg)
+    if content == 'Адреса и графики работ отделений':
+        bot.send_message(chat_id=cid, text='Адреса и графики работ отделений', reply_markup=create_keyboard(adress))
     elif content == 'Контакты':
         bot.send_message(chat_id=cid, text='+77273309300\nCall-centre: 300')
     elif content == 'Самое важное':
         bot.send_message(chat_id=cid, text='Здесь будет система жсс')
+        bot.send_message(chat_id=cid, text='+77273309300\n+77272793511\n+77273307590')
     elif content == 'Частые вопросы': 
         bot.send_message(chat_id=cid, text='Выберите интересующий вопрос:\n'+'1.Что такое Интернет-банк?\n'+'2.На какие цели могу я получить кредит?\n'+'3.С какого возраста можно открыть депозит?\n'+'4.Сколько стоит открыть кредит?\n'+'5.Могу ли получить арендное жильё?\n'+'6.Почему мне выгодно открыть депозит жилищных-строительных сбережений?\n'+'7.Сколько я должен накопить чтобы приобрести жильё?\n'+'8.Как я могу приобрести жильё?', reply_markup=inline())
 
