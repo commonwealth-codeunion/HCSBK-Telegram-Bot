@@ -1,17 +1,39 @@
-import telebot
+import telebot, requests, bs4
 from telebot import types
-import requests
 
 
-linkval = 'https://openexchangerates.org/api/latest.json?app_id=60da2bd9b3064714b2c5f2e8b00fbd40'
+
+linkval = 'https://prodengi.kz/currency/konverter_valyt/'
 
 data = requests.get(linkval)
-slovar = data.json()
-valuty = slovar['rates']
+soup = bs4.BeautifulSoup(data.text, 'html.parser')
 
 token = '1061153932:AAFPiMBR-bpTtqAHkz_dA4sTvsS-ktgUWQ4'
 
 bot = telebot.TeleBot(token)
+
+valuty1 = []
+
+valuty2 = []
+
+valuty3 = {}
+
+val1 = soup.findAll('div', {'class': 'quant befor'})
+text1 = soup.findAll('p')
+for text in val1:
+    text = text.next_element.next_element
+    valuty1.append(text)
+
+val2 = soup.findAll('div', {'class': 'price_buy befor'})
+text2 = soup.findAll('p')
+for text in val2:
+    text = text.next_element.next_element
+    valuty2.append(text)
+
+for i in range(0, len(valuty2)):
+    valuty3[valuty1[i]] = valuty2[i]
+    
+
 
 @bot.message_handler(commands=['start'])
 def send_message(msg):
@@ -67,12 +89,8 @@ def callback_inline(call):
     
 
 
-<<<<<<< HEAD
-menu = ['Отделения в городе', 'Контакты', 'Частые вопросы', 'Самое важное']
-=======
-menu = ['Адреса и графики работ отделений', 'Контакты', 'Частые вопросы']
+menu = ['Адреса и графики работ отделений', 'Контакты', 'Частые вопросы','Курс валют']
 adress = ['Центральный аппарат | пр-т. Абылай хана, 91', 'пр-т. Сейфуллина, 498', 'ул. Шевченко, 155/6', 'мкр. Жетысу-2, 70Б', 'ул. Тулебаева, 15/18А']
->>>>>>> d373e450325f02b9436bf5df467661e8c8ab8f79
 
 
 
@@ -108,6 +126,10 @@ def send_message1(msg):
     elif content == 'Самое важное':
         bot.send_message(chat_id=cid, text='Здесь будет система жсс')
         bot.send_message(chat_id=cid, text='+77273309300\n+77272793511\n+77273307590')
+    elif content == 'Курс валют':
+        bot.send_message(chat_id=cid, text='1 Доллар США'+'='+valuty3['1 Доллар США'])
+        bot.send_message(chat_id=cid, text='1 Евро'+'='+valuty3['1 Евро'])
+        bot.send_message(chat_id=cid, text='1 Российский рубль'+'='+valuty3['1 Российский рубль'])
     elif content == 'Частые вопросы': 
         bot.send_message(chat_id=cid, text='Выберите интересующий вопрос:\n'+'1.Что такое Интернет-банк?\n'+'2.На какие цели могу я получить кредит?\n'+'3.С какого возраста можно открыть депозит?\n'+'4.Сколько стоит открыть кредит?\n'+'5.Могу ли получить арендное жильё?\n'+'6.Почему мне выгодно открыть депозит жилищных-строительных сбережений?\n'+'7.Сколько я должен накопить чтобы приобрести жильё?\n'+'8.Как я могу приобрести жильё?', reply_markup=inline())
 
@@ -118,10 +140,3 @@ bot.polling(none_stop=True)
 
 
 #связь со строительными кампаниями,видеть квартиры тд
-#меню кейборда "самое важное" система жсс
-#инлайн киборд получить консультацию
-#переадресация на сотрудника банка
-#инлайн киборд юрл ссылка на 2гис
-#кнопка назад на киборде
-#валюты конвертация
-#сделать контакт как контакт 
