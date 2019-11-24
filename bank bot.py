@@ -9,8 +9,7 @@ soup = bs4.BeautifulSoup(data.text, 'html.parser')
 
 photo = types.InputMedia
 
-token = '1061153932:AAFPiMBR-
-bpTtqAHkz_dA4sTvsS-ktgUWQ4'
+token = '1061153932:AAFPiMBR-bpTtqAHkz_dA4sTvsS-ktgUWQ4'
 
 bot = telebot.TeleBot(token)
 
