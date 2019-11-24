@@ -1,14 +1,16 @@
+
 import telebot, requests, bs4
 from telebot import types
-
-
-
+#импортировал библиотеку для парсинга, тк с тем сайтом не удобно работать
 linkval = 'https://prodengi.kz/currency/konverter_valyt/'
 
 data = requests.get(linkval)
 soup = bs4.BeautifulSoup(data.text, 'html.parser')
 
-token = '1061153932:AAFPiMBR-bpTtqAHkz_dA4sTvsS-ktgUWQ4'
+photo = types.InputMedia
+
+token = '1061153932:AAFPiMBR-
+bpTtqAHkz_dA4sTvsS-ktgUWQ4'
 
 bot = telebot.TeleBot(token)
 
@@ -30,13 +32,11 @@ for text in val2:
 
 for i in range(0, len(valuty2)):
     valuty3[valuty1[i]] = valuty2[i]
-    
-
 
 @bot.message_handler(commands=['start'])
 def send_message(msg):
     cid = msg.chat.id
-    bot.send_message(chat_id=cid, text='Здравствтуйте!', reply_markup=create_keyboard(menu))
+    bot.send_message(chat_id=cid, text='Здравствуйте!', reply_markup=create_keyboard(menu))
 
 def create_keyboard(words=None, width=1, isOneTime=False, isPhone=False):
     keyboard = types.ReplyKeyboardMarkup(one_time_keyboard=isOneTime, row_width=width, resize_keyboard = True)
@@ -87,9 +87,9 @@ def callback_inline(call):
     
 
 
-menu = ['Адреса и графики работ отделений', 'Контакты', 'Частые вопросы','Курс валют']
-adress = ['Центральный аппарат | пр-т. Абылай хана, 91', 'пр-т. Сейфуллина, 498', 'ул. Шевченко, 155/6', 'мкр. Жетысу-2, 70Б', 'ул. Тулебаева, 15/18А']
-
+menu = ['Адреса и графики работ отделений', 'Контакты', 'Частые вопросы', 'Самое важное','Курс валют']
+adress = ['Центральный аппарат | пр-т. Абылай хана, 91', 'пр-т. Сейфуллина, 498', 'ул. Шевченко, 155/6', 'мкр. Жетысу-2, 70Б', 'ул. Тулебаева, 15/18А','Назад']
+important = ['Всё о системе ЖС', 'Жилищный заём', 'Промежуточный заём', 'Предварительный заём', 'Назад']
 
 
 def send_adress1(msg):
@@ -99,7 +99,7 @@ def send_adress1(msg):
         bot.send_message(chat_id=cid, text='Центральный аппарат "Жилстройсбербанк Казахстана"\n\nг. Алматы, пр-т. Абылай хана, 91\nhttps://go.2gis.com/20uzt\n\nГрафик работы:\nбудние дни: 09:00 - 18:00')
         bot.send_location(chat_id=cid, latitude=43.255660, longitude=76.948611)
     elif content == 'пр-т. Сейфуллина, 498':
-        bot.send_message(chat_id=cid, text='Отеделение банка,\n\nРеспублика Казахсанг, .Алматы, пр-т. Сейфуллина, 498\nhttps://go.2gis.com/9fxva\n\nГрафик работы:\nбудние дни: 09:00 - 18:00')
+        bot.send_message(chat_id=cid, text='Отеделение банка,\n\nРеспублика Казахсан, .Алматы, пр-т. Сейфуллина, 498\nhttps://go.2gis.com/9fxva\n\nГрафик работы:\nбудние дни: 09:00 - 18:00')
         bot.send_location(chat_id=cid, latitude=43.235546, longitude=76.981677)
     elif content == 'ул. Шевченко, 155/6':
         bot.send_message(chat_id=cid, text='Отеделение банка,\n\nРеспублика Казахсан, г.Алматы, ул. Шевченко, 155/6\nhttps://go.2gis.com/pr0nl2\n\nГрафик работы:\nбудние дни: 09:00 - 18:00')
@@ -110,6 +110,23 @@ def send_adress1(msg):
     elif content == 'ул. Тулебаева, 15/18А':
         bot.send_message(chat_id=cid, text='Отеделение банка,\n\nРеспублика Казахсан, г.Алматы, ул. Тулебаева, 15/18А\nhttps://go.2gis.com/11pte\n\nГрафик работы:\nбудние дни: 09:00 - 18:00')
         bot.send_location(chat_id=cid, latitude=43.26699, longitude=76.946132)
+    elif content == 'Назад':
+        send_message(msg)
+
+def send_important(msg):
+    cid = msg.chat.id
+    content = msg.text
+    if content == 'Всё о системе ЖС':#в каждой условной конструкции должны будут быть кластеры картинками от артёма
+        bot.send_message(chat_id=cid, text='разработка') 
+    elif content == 'Жилищный заём':
+        bot.send_message(chat_id=cid, text='разработка')
+    elif content == 'Промежуточный заём':
+        bot.send_message(chat_id=cid, text='разработка')
+    elif content == 'Предварительный заём':
+        bot.send_message(chat_id=cid, text='разработка')
+    elif content == 'Назад':
+        send_message(msg)
+
 
 
 @bot.message_handler(content_types=['text'])
@@ -117,27 +134,26 @@ def send_message1(msg):
     cid = msg.chat.id
     content = msg.text
     send_adress1(msg)
+    send_important(msg)
     if content == 'Адреса и графики работ отделений':
         bot.send_message(chat_id=cid, text='Адреса и графики работ отделений', reply_markup=create_keyboard(adress))
     elif content == 'Контакты':
-        bot.send_message(chat_id=cid, text='+77273309300\nCall-centre: 300')
-    elif content == 'Самое важное':
-        bot.send_message(chat_id=cid, text='Здесь будет система жсс')
         bot.send_message(chat_id=cid, text='+77273309300\n+77272793511\n+77273307590')
+    elif content == 'Частые вопросы': 
+        bot.send_message(chat_id=cid, text='Выберите интерисующий вопрос:\n'+'1.Что такое Интернет-банк?\n'+'2.На какие цели могу я получить кредит?\n'+'3.С какого возраста можно открыть депозит?\n'+'4.Сколько стоит открыть кредит?\n'+'5.Могу ли получить арендное жильё?\n'+'6.Почему мне выгодно открыть депозит жилищных-строительных сбережений?\n'+'7.Сколько я должен накопить чтобы приобрести жильё?\n'+'8.Как я могу приобрести жильё?', reply_markup=inline())
     elif content == 'Курс валют':
         bot.send_message(chat_id=cid, text='1 Доллар США'+'='+valuty3['1 Доллар США'])
         bot.send_message(chat_id=cid, text='1 Евро'+'='+valuty3['1 Евро'])
         bot.send_message(chat_id=cid, text='1 Российский рубль'+'='+valuty3['1 Российский рубль'])
-    elif content == 'Частые вопросы': 
-        bot.send_message(chat_id=cid, text='Выберите интересующий вопрос:\n'+'1.Что такое Интернет-банк?\n'+'2.На какие цели могу я получить кредит?\n'+'3.С какого возраста можно открыть депозит?\n'+'4.Сколько стоит открыть кредит?\n'+'5.Могу ли получить арендное жильё?\n'+'6.Почему мне выгодно открыть депозит жилищных-строительных сбережений?\n'+'7.Сколько я должен накопить чтобы приобрести жильё?\n'+'8.Как я могу приобрести жильё?', reply_markup=inline())
+    elif content == 'Самое важное':
+        bot.send_message(chat_id=cid, text='Самое важное', reply_markup=create_keyboard(important))
 
 #если отправить все валюты одним соообщением, он, почему-то выдаст ошибку, с этим ещё нужно будет разобраться, снизу код, можешь проверить
 #bot.send_message(chat_id=cid, text='1 Доллар США'+'='+valuty3['1 Доллар США'], '\n1 Евро'+'='+valuty3['1 Евро'], '\n1 Российский рубль'+'='+valuty3['1 Российский рубль'])
 #в словаре valuty3 сейчас есть практически все валюты, мб это нам пригодится
 
 
+
+
 bot.polling(none_stop=True)
 
-
-
-#связь со строительными кампаниями,видеть квартиры тд
