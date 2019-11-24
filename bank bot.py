@@ -1,6 +1,7 @@
 
 import telebot, requests, bs4
 from telebot import types
+import json
 #импортировал библиотеку для парсинга, тк с тем сайтом не удобно работать
 linkval = 'https://prodengi.kz/currency/konverter_valyt/'
 
@@ -43,7 +44,34 @@ def create_keyboard(words=None, width=1, isOneTime=False, isPhone=False):
         keyboard.add(types.KeyboardButton(text=word, request_contact=isPhone))
     return keyboard
 
-#@bot.message_handler(content_types=['text'])
+#@bot.message_handler(commands=['url'])
+def intwogis1():
+    keytwogis = types.InlineKeyboardMarkup()
+    url1 = types.InlineKeyboardButton(text='proba',url='https://go.2gis.com/20uzt')
+    keytwogis.add(url1)
+    return keytwogis
+def intwogis2():
+    keytwogis = types.InlineKeyboardMarkup()
+    url2 = types.InlineKeyboardButton(text='proba',url='https://go.2gis.com/9fxva')
+    keytwogis.add(url2)
+    return keytwogis
+def intwogis3():
+    keytwogis = types.InlineKeyboardMarkup()
+    url3 = types.InlineKeyboardButton(text='proba',url='https://go.2gis.com/pr0nl2')
+    keytwogis.add(url3)
+    return keytwogis
+def intwogis4():
+    keytwogis = types.InlineKeyboardMarkup()
+    url4 = types.InlineKeyboardButton(text='proba',url='https://go.2gis.com/stnlt')
+    keytwogis.add(url4)
+    return keytwogis
+def intwogis5():
+    keytwogis = types.InlineKeyboardMarkup()
+    url5 = types.InlineKeyboardButton(text='proba',url='https://go.2gis.com/11pte')
+    keytwogis.add(url5)
+    return keytwogis
+
+
 def inline(): 
     keyb = types.InlineKeyboardMarkup(8)
     but1 = types.InlineKeyboardButton('1', callback_data='1s')
@@ -95,19 +123,19 @@ def send_adress1(msg):
     cid = msg.chat.id
     content = msg.text
     if content == 'Центральный аппарат | пр-т. Абылай хана, 91':
-        bot.send_message(chat_id=cid, text='Центральный аппарат "Жилстройсбербанк Казахстана"\n\nг. Алматы, пр-т. Абылай хана, 91\nhttps://go.2gis.com/20uzt\n\nГрафик работы:\nбудние дни: 09:00 - 18:00')
+        bot.send_message(chat_id=cid, text='Центральный аппарат "Жилстройсбербанк Казахстана"\n\nг. Алматы, пр-т. Абылай хана, 91\nГрафик работы:\nбудние дни: 09:00 - 18:00', reply_markup=intwogis1())
         bot.send_location(chat_id=cid, latitude=43.255660, longitude=76.948611)
     elif content == 'пр-т. Сейфуллина, 498':
-        bot.send_message(chat_id=cid, text='Отеделение банка,\n\nРеспублика Казахсан, .Алматы, пр-т. Сейфуллина, 498\nhttps://go.2gis.com/9fxva\n\nГрафик работы:\nбудние дни: 09:00 - 18:00')
+        bot.send_message(chat_id=cid, text='Отеделение банка,\n\nРеспублика Казахсан, .Алматы, пр-т. Сейфуллина, 498\nГрафик работы:\nбудние дни: 09:00 - 18:00', reply_markup=intwogis2())
         bot.send_location(chat_id=cid, latitude=43.235546, longitude=76.981677)
     elif content == 'ул. Шевченко, 155/6':
-        bot.send_message(chat_id=cid, text='Отеделение банка,\n\nРеспублика Казахсан, г.Алматы, ул. Шевченко, 155/6\nhttps://go.2gis.com/pr0nl2\n\nГрафик работы:\nбудние дни: 09:00 - 18:00')
+        bot.send_message(chat_id=cid, text='Отеделение банка,\n\nРеспублика Казахсан, г.Алматы, ул. Шевченко, 155/6\nГрафик работы:\nбудние дни: 09:00 - 18:00', reply_markup=intwogis3())
         bot.send_location(chat_id=cid, latitude=43.2437411, longitude=76.8999463)
     elif content == 'мкр. Жетысу-2, 70Б':
-        bot.send_message(chat_id=cid, text='Отеделение банка,\n\nРеспублика Казахсан, г.Алматы, мкр. Жетысу-2, 70Б\nhttps://go.2gis.com/stnlt\n\nГрафик работы:\nбудние дни: 09:00 - 18:00')
+        bot.send_message(chat_id=cid, text='Отеделение банка,\n\nРеспублика Казахсан, г.Алматы, мкр. Жетысу-2, 70Б\nГрафик работы:\nбудние дни: 09:00 - 18:00', reply_markup=intwogis4())
         bot.send_location(chat_id=cid, latitude=43.219273, longitude=76.846908)
     elif content == 'ул. Тулебаева, 15/18А':
-        bot.send_message(chat_id=cid, text='Отеделение банка,\n\nРеспублика Казахсан, г.Алматы, ул. Тулебаева, 15/18А\nhttps://go.2gis.com/11pte\n\nГрафик работы:\nбудние дни: 09:00 - 18:00')
+        bot.send_message(chat_id=cid, text='Отеделение банка,\n\nРеспублика Казахсан, г.Алматы, ул. Тулебаева, 15/18А\nГрафик работы:\nбудние дни: 09:00 - 18:00', reply_markup=intwogis5())
         bot.send_location(chat_id=cid, latitude=43.26699, longitude=76.946132)
     elif content == 'Назад':
         send_message(msg)
