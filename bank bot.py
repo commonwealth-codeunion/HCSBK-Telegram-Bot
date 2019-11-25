@@ -71,7 +71,24 @@ def intwogis5():
     keytwogis.add(url5)
     return keytwogis
 
-
+def prem():
+    keyprem = types.InlineKeyboardMarkup()
+    prem1 = types.InlineKeyboardButton(text='Узнать больше о премии государства', url='https://hcsbk.kz/ru/save/state-award/')
+    opend = types.InlineKeyboardButton(text='Открыть депозит', url='https://hcsbk.kz/ru/save/helpful-information/how-to-open/')
+    dog = types.InlineKeyboardButton(text='Узнать больше о договороной сумме', url='https://hcsbk.kz/ru/most-important/helpful-information/contractual-amount/')
+    ocenka = types.InlineKeyboardButton(text='Узнать больше о договороной сумме', url='https://hcsbk.kz/ru/most-important/helpful-information/performance-indicator/')
+    keyprem.add(ocenka)
+    keyprem.add(dog)
+    keyprem.add(prem1)
+    keyprem.add(opend) 
+    return keyprem
+'''
+def opende():
+    keyopen = types.InlineKeyboardMarkup()
+    opend = types.InlineKeyboardButton(text='Открыть депозит', url='https://hcsbk.kz/ru/save/helpful-information/how-to-open/')
+    keyopen.add(opend)
+    return keyopen
+'''
 def inline(): 
     keyb = types.InlineKeyboardMarkup(8)
     but1 = types.InlineKeyboardButton('1', callback_data='1s')
@@ -82,14 +99,8 @@ def inline():
     but6 = types.InlineKeyboardButton('6', callback_data='6s')
     but7 = types.InlineKeyboardButton('7', callback_data='7s')
     but8 = types.InlineKeyboardButton('8', callback_data='8s')  
-    keyb.add(but1)    
-    keyb.add(but2)
-    keyb.add(but3)
-    keyb.add(but4)
-    keyb.add(but5)
-    keyb.add(but6)
-    keyb.add(but7)
-    keyb.add(but8)   
+    keyb.row(but1, but2, but3, but4)    
+    keyb.row(but5, but6, but7, but8)   
     return keyb
 
 @bot.callback_query_handler(func=lambda call: True)
@@ -111,8 +122,6 @@ def callback_inline(call):
             bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='Для приобретения жилья на рынке необходимо накопить либо единовременно внести 50% от договорной суммы.')
         elif call.data == "8s":
             bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='Вкладчик имеет возможность приобрести жилье на рынке либо в рамках государственных и отраслевых программ жилищного строительства.')
-    
-
 
 menu = ['Адреса и графики работ отделений', 'Контакты', 'Частые вопросы', 'Самое важное','Курс валют']
 adress = ['Центральный аппарат | пр-т. Абылай хана, 91', 'пр-т. Сейфуллина, 498', 'ул. Шевченко, 155/6', 'мкр. Жетысу-2, 70Б', 'ул. Тулебаева, 15/18А','Назад']
@@ -143,8 +152,8 @@ def send_adress1(msg):
 def send_important(msg):
     cid = msg.chat.id
     content = msg.text
-    if content == 'Всё о системе ЖС':#в каждой условной конструкции должны будут быть кластеры картинками от артёма
-        bot.send_message(chat_id=cid, text='разработка') 
+    if content == 'Всё о системе ЖС':
+        bot.send_message(chat_id=cid, text='ВСЕ О СИСТЕМЕ ЖИЛСТРОЙСБЕРЕЖЕНИЙ\nУНИКАЛЬНЫЙ СПОСОБ ПОЛУЧИТЬ ИПОТЕЧНЫЙ КРЕДИТ ПО СТАВКЕ 5% И НИЖЕ!\n\nКАК ЭТО РАБОТАЕТ?\n1.Откройте депозит в Жилстройсбербанке\n2.Выполните всего три условия:\nкопите на депозите средства не менее трех лет\nнакопите половину необходимой вам суммы (50%)\nдостигните минимального уровня оценочного показателя (ОП)\n\nЕсли вы выполнили все три условия – вы получаете кредит, который называется жилищный займ, по ставке 5% годовых\n\nЕсли вы ПЕРЕвыполнили эти условия, то есть копили дольше – ставка по займу снижается (минимальная ставка 3,5%)\n\nНа сумму ваших накоплений ежегодно начисляется вознаграждение Банка и премия государства.\nЖилье на полученный кредит можно купить в любом городе страны., ВАМ ТАКЖЕ НЕОБХОДИМО ЗНАТЬ НЕСКОЛЬКО ВАЖНЫХ ТЕРМИНОВ СИСТЕМЫ ЖИЛСТРОЙСБЕРЕЖЕНИЙ:\nдоговорная сумма\nпремия государства\nоценочный показатель', reply_markup=prem())
     elif content == 'Жилищный заём':
         bot.send_message(chat_id=cid, text='разработка')
     elif content == 'Промежуточный заём':
