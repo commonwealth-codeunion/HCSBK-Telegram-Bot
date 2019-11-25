@@ -38,6 +38,10 @@ def send_message(msg):
     cid = msg.chat.id
     bot.send_message(chat_id=cid, text='Здравствуйте!', reply_markup=create_keyboard(menu))
 
+def send_back(msg):
+    cid = msg.chat.id
+    bot.send_message(chat_id=cid, text='Назад', reply_markup=create_keyboard(menu))
+
 def create_keyboard(words=None, width=1, isOneTime=False, isPhone=False):
     keyboard = types.ReplyKeyboardMarkup(one_time_keyboard=isOneTime, row_width=width, resize_keyboard = True)
     for word in words:
@@ -125,7 +129,7 @@ def callback_inline(call):
 
 menu = ['Адреса и графики работ отделений', 'Контакты', 'Частые вопросы', 'Самое важное','Курс валют']
 adress = ['Центральный аппарат | пр-т. Абылай хана, 91', 'пр-т. Сейфуллина, 498', 'ул. Шевченко, 155/6', 'мкр. Жетысу-2, 70Б', 'ул. Тулебаева, 15/18А','Назад']
-important = ['Всё о системе ЖС', 'Жилищный заём', 'Промежуточный заём', 'Предварительный заём', 'Назад']
+important = ['Всё о системе ЖС', 'Жилищный заём', 'Промежуточный заём', 'Предварительный заём', 'Назад ']
 
 
 def send_adress1(msg):
@@ -147,7 +151,7 @@ def send_adress1(msg):
         bot.send_message(chat_id=cid, text='Отеделение банка,\n\nРеспублика Казахсан, г.Алматы, ул. Тулебаева, 15/18А\nГрафик работы:\nбудние дни: 09:00 - 18:00', reply_markup=intwogis5())
         bot.send_location(chat_id=cid, latitude=43.26699, longitude=76.946132)
     elif content == 'Назад':
-        send_message(msg)
+        send_back(msg)
 
 def send_important(msg):
     cid = msg.chat.id
@@ -160,8 +164,8 @@ def send_important(msg):
         bot.send_message(chat_id=cid, text='разработка')
     elif content == 'Предварительный заём':
         bot.send_message(chat_id=cid, text='разработка')
-    elif content == 'Назад':
-        send_message(msg)
+    elif content == 'Назад ':
+        send_back(msg)
 
 
 
