@@ -7,7 +7,8 @@ linkval = 'https://prodengi.kz/currency/konverter_valyt/'
 
 data = requests.get(linkval)
 soup = bs4.BeautifulSoup(data.text, 'html.parser')
-
+ru = False
+kz = False
 photo = types.InputMedia
 
 token = '1061153932:AAFPiMBR-bpTtqAHkz_dA4sTvsS-ktgUWQ4'
@@ -74,9 +75,13 @@ def intwogis5():
     url5 = types.InlineKeyboardButton(text='proba',url='https://go.2gis.com/11pte')
     keytwogis.add(url5)
     return keytwogis
+'''
+def convert():
+'''
 
 def prem():
     keyprem = types.InlineKeyboardMarkup()
+    
     prem1 = types.InlineKeyboardButton(text='Узнать больше о премии государства', url='https://hcsbk.kz/ru/save/state-award/')
     opend = types.InlineKeyboardButton(text='Открыть депозит', url='https://hcsbk.kz/ru/save/helpful-information/how-to-open/')
     dog = types.InlineKeyboardButton(text='Узнать больше о договороной сумме', url='https://hcsbk.kz/ru/most-important/helpful-information/contractual-amount/')
@@ -86,13 +91,7 @@ def prem():
     keyprem.add(prem1)
     keyprem.add(opend) 
     return keyprem
-'''
-def opende():
-    keyopen = types.InlineKeyboardMarkup()
-    opend = types.InlineKeyboardButton(text='Открыть депозит', url='https://hcsbk.kz/ru/save/helpful-information/how-to-open/')
-    keyopen.add(opend)
-    return keyopen
-'''
+
 def inline(): 
     keyb = types.InlineKeyboardMarkup(8)
     but1 = types.InlineKeyboardButton('1', callback_data='1s')
@@ -127,9 +126,10 @@ def callback_inline(call):
         elif call.data == "8s":
             bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='Вкладчик имеет возможность приобрести жилье на рынке либо в рамках государственных и отраслевых программ жилищного строительства.')
 
-menu = ['Адреса и графики работ отделений', 'Контакты', 'Частые вопросы', 'Самое важное','Курс валют']
+menu = ['Адреса и графики работ отделений', 'Контакты', 'Частые вопросы', 'Самое важное','Курс валют','Конвертация']
 adress = ['Центральный аппарат | пр-т. Абылай хана, 91', 'пр-т. Сейфуллина, 498', 'ул. Шевченко, 155/6', 'мкр. Жетысу-2, 70Б', 'ул. Тулебаева, 15/18А','Назад']
 important = ['Всё о системе ЖС', 'Жилищный заём', 'Промежуточный заём', 'Предварительный заём', 'Назад ']
+convert = ['🇰🇿','🇷🇺','🇺🇸','🇪🇺'] 
 
 
 def send_adress1(msg):
@@ -167,14 +167,59 @@ def send_important(msg):
     elif content == 'Назад ':
         send_back(msg)
 
+def send_convert(msg):
+    cid = msg.chat.id
+    content = msg.text
+   
+    #kztconvert = 0
+    if content == '🇺🇸':
+        sent2 = bot.send_message(chat_id=cid, text='Введите сумму')
+        bot.register_next_step_handler(sent2, convUs)
+        #eurconvert = content
+    elif content == '🇰🇿':
+        sent = bot.send_message(chat_id=cid, text='Введите сумму')
+        #sent = bot.send_message(chat_id=cid, text=content+'тенге= '+usdconvert+'долларов Сша\n'+content+'тенге= '+eurconvert+'евро')
+        bot.register_next_step_handler(sent, convKz)
+    elif content == '🇪🇺':
+        sent3 = bot.send_message(chat_id=cid, text='Введите сумму')
+        bot.register_next_step_handler(sent3, convEu)
+    elif content == '🇷🇺':
+        sent4 = bot.send_message(chat_id=cid, text='Введите сумму')
+        bot.register_next_step_handler(sent4, convRu)
 
-
+def convKz(msg):
+    cid = msg.chat.id
+    content = msg.text
+    usdconvert = int(content)%float(valuty3['1 Доллар США'])
+    eurconvert = int(content)%float(valuty3['1 Евро'])
+    bot.send_message(chat_id=cid, text=content+'тенге= '+str(usdconvert)+'долларов США\n'+content+'тенге= '+str(eurconvert)+'евро')
+    #bot.send_message(chat_id=cid, text=str(usdconvert) +" " + str(eurconvert))
+def convUs(msg):
+    cid = msg.chat.id
+    content = msg.text
+    kztconvert = int(content)*float(valuty3['1 Доллар США'])
+    eurconvert = int(content)%float(valuty3['1 Евро'])
+    bot.send_message(chat_id=cid, text=content+'долларов США= '+str(kztconvert)+'тенге\n'+content+'долларов США= '+str(eurconvert)+'евро')
+    #bot.send_message(chat_id=cid, text=str(kztconvert) +" " + str(eurconvert))
+def convEu(msg):
+    cid = msg.chat.id
+    content = msg.text
+    kztconvert = int(content)*float(valuty3['1 Евро'])
+    usdconvert = int(content)%float(valuty3['1 Евро'])
+    bot.send_message(chat_id=cid, text=content+'Евро= '+str(kztconvert)+'тенге\n'+content+'Евро= '+str(usdconvert)+'долларов США')
+def convRu(msg):
+    cid = msg.chat.id
+    content = msg.text
+    kztconvert = int(content)*float(valuty3['1 Российский рубль'])
+    usdconvert = int(content)%float(valuty3['1 Российский рубль'])
+    bot.send_message(chat_id=cid, text=content+'рублей= '+str(kztconvert)+'тенге\n'+content+'рублей= '+str(usdconvert)+'долларов США')
 @bot.message_handler(content_types=['text'])
 def send_message1(msg):
     cid = msg.chat.id
     content = msg.text
     send_adress1(msg)
     send_important(msg)
+    send_convert(msg)
     if content == 'Адреса и графики работ отделений':
         bot.send_message(chat_id=cid, text='Адреса и графики работ отделений', reply_markup=create_keyboard(adress))
     elif content == 'Контакты':
@@ -182,18 +227,13 @@ def send_message1(msg):
     elif content == 'Частые вопросы': 
         bot.send_message(chat_id=cid, text='Выберите интерисующий вопрос:\n'+'1.Что такое Интернет-банк?\n'+'2.На какие цели могу я получить кредит?\n'+'3.С какого возраста можно открыть депозит?\n'+'4.Сколько стоит открыть кредит?\n'+'5.Могу ли получить арендное жильё?\n'+'6.Почему мне выгодно открыть депозит жилищных-строительных сбережений?\n'+'7.Сколько я должен накопить чтобы приобрести жильё?\n'+'8.Как я могу приобрести жильё?', reply_markup=inline())
     elif content == 'Курс валют':
-        bot.send_message(chat_id=cid, text='1 Доллар США'+'='+valuty3['1 Доллар США'])
-        bot.send_message(chat_id=cid, text='1 Евро'+'='+valuty3['1 Евро'])
-        bot.send_message(chat_id=cid, text='1 Российский рубль'+'='+valuty3['1 Российский рубль'])
+        bot.send_message(chat_id=cid, text='1 Доллар США'+'='+valuty3['1 Доллар США']+'\n1 Евро'+'='+valuty3['1 Евро']+'\n1 Российский рубль'+'='+valuty3['1 Российский рубль'])
     elif content == 'Самое важное':
         bot.send_message(chat_id=cid, text='Самое важное', reply_markup=create_keyboard(important))
+    elif content == 'Конвертация':
+        bot.send_message(chat_id=cid, text='Выберите валюту', reply_markup=create_keyboard(convert))
 
-#если отправить все валюты одним соообщением, он, почему-то выдаст ошибку, с этим ещё нужно будет разобраться, снизу код, можешь проверить
-#bot.send_message(chat_id=cid, text='1 Доллар США'+'='+valuty3['1 Доллар США'], '\n1 Евро'+'='+valuty3['1 Евро'], '\n1 Российский рубль'+'='+valuty3['1 Российский рубль'])
 #в словаре valuty3 сейчас есть практически все валюты, мб это нам пригодится
 
 
-
-
 bot.polling(none_stop=True)
-
