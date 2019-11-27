@@ -41,7 +41,7 @@ def send_message(msg):
 
 def send_back(msg):
     cid = msg.chat.id
-    bot.send_message(chat_id=cid, text='Назад', reply_markup=create_keyboard(menu))
+    bot.send_message(chat_id=cid, text='Главное меню', reply_markup=create_keyboard(menu))
 
 def create_keyboard(words=None, width=1, isOneTime=False, isPhone=False):
     keyboard = types.ReplyKeyboardMarkup(one_time_keyboard=isOneTime, row_width=width, resize_keyboard = True)
@@ -52,27 +52,27 @@ def create_keyboard(words=None, width=1, isOneTime=False, isPhone=False):
 #@bot.message_handler(commands=['url'])
 def intwogis1():
     keytwogis = types.InlineKeyboardMarkup()
-    url1 = types.InlineKeyboardButton(text='proba',url='https://go.2gis.com/20uzt')
+    url1 = types.InlineKeyboardButton(text='2GIS',url='https://go.2gis.com/20uzt')
     keytwogis.add(url1)
     return keytwogis
 def intwogis2():
     keytwogis = types.InlineKeyboardMarkup()
-    url2 = types.InlineKeyboardButton(text='proba',url='https://go.2gis.com/9fxva')
+    url2 = types.InlineKeyboardButton(text='2GIS',url='https://go.2gis.com/9fxva')
     keytwogis.add(url2)
     return keytwogis
 def intwogis3():
     keytwogis = types.InlineKeyboardMarkup()
-    url3 = types.InlineKeyboardButton(text='proba',url='https://go.2gis.com/pr0nl2')
+    url3 = types.InlineKeyboardButton(text='2GIS',url='https://go.2gis.com/pr0nl2')
     keytwogis.add(url3)
     return keytwogis
 def intwogis4():
     keytwogis = types.InlineKeyboardMarkup()
-    url4 = types.InlineKeyboardButton(text='proba',url='https://go.2gis.com/stnlt')
+    url4 = types.InlineKeyboardButton(text='2GIS',url='https://go.2gis.com/stnlt')
     keytwogis.add(url4)
     return keytwogis
 def intwogis5():
     keytwogis = types.InlineKeyboardMarkup()
-    url5 = types.InlineKeyboardButton(text='proba',url='https://go.2gis.com/11pte')
+    url5 = types.InlineKeyboardButton(text='2GIS',url='https://go.2gis.com/11pte')
     keytwogis.add(url5)
     return keytwogis
 '''
@@ -85,7 +85,7 @@ def prem():
     prem1 = types.InlineKeyboardButton(text='Узнать больше о премии государства', url='https://hcsbk.kz/ru/save/state-award/')
     opend = types.InlineKeyboardButton(text='Открыть депозит', url='https://hcsbk.kz/ru/save/helpful-information/how-to-open/')
     dog = types.InlineKeyboardButton(text='Узнать больше о договороной сумме', url='https://hcsbk.kz/ru/most-important/helpful-information/contractual-amount/')
-    ocenka = types.InlineKeyboardButton(text='Узнать больше о договороной сумме', url='https://hcsbk.kz/ru/most-important/helpful-information/performance-indicator/')
+    ocenka = types.InlineKeyboardButton(text='Узнать больше об оценочном показателе', url='https://hcsbk.kz/ru/most-important/helpful-information/performance-indicator/')
     keyprem.add(ocenka)
     keyprem.add(dog)
     keyprem.add(prem1)
@@ -129,26 +129,26 @@ def callback_inline(call):
 menu = ['Адреса и графики работ отделений', 'Контакты', 'Частые вопросы', 'Самое важное','Курс валют','Конвертация']
 adress = ['Центральный аппарат | пр-т. Абылай хана, 91', 'пр-т. Сейфуллина, 498', 'ул. Шевченко, 155/6', 'мкр. Жетысу-2, 70Б', 'ул. Тулебаева, 15/18А','Назад']
 important = ['Всё о системе ЖС', 'Жилищный заём', 'Промежуточный заём', 'Предварительный заём', 'Назад ']
-convert = ['🇰🇿','🇷🇺','🇺🇸','🇪🇺'] 
+convert = ['🇰🇿','🇷🇺','🇺🇸','🇪🇺','Назад  '] 
 
 
 def send_adress1(msg):
     cid = msg.chat.id
     content = msg.text
     if content == 'Центральный аппарат | пр-т. Абылай хана, 91':
-        bot.send_message(chat_id=cid, text='Центральный аппарат "Жилстройсбербанк Казахстана"\n\nг. Алматы, пр-т. Абылай хана, 91\nГрафик работы:\nбудние дни: 09:00 - 18:00', reply_markup=intwogis1())
+        bot.send_message(chat_id=cid, text='Центральный аппарат "Жилстройсбербанк Казахстана"\n\nг. Алматы, пр-т. Абылай хана, 91\nГрафик работы: будние дни: 09:00 - 18:00', reply_markup=intwogis1())
         bot.send_location(chat_id=cid, latitude=43.255660, longitude=76.948611)
     elif content == 'пр-т. Сейфуллина, 498':
-        bot.send_message(chat_id=cid, text='Отеделение банка,\n\nРеспублика Казахсан, .Алматы, пр-т. Сейфуллина, 498\nГрафик работы:\nбудние дни: 09:00 - 18:00', reply_markup=intwogis2())
+        bot.send_message(chat_id=cid, text='Отеделение банка\n\nРеспублика Казахсан, .Алматы, пр-т. Сейфуллина, 498\nГрафик работы: будние дни: 09:00 - 18:00', reply_markup=intwogis2())
         bot.send_location(chat_id=cid, latitude=43.235546, longitude=76.981677)
     elif content == 'ул. Шевченко, 155/6':
-        bot.send_message(chat_id=cid, text='Отеделение банка,\n\nРеспублика Казахсан, г.Алматы, ул. Шевченко, 155/6\nГрафик работы:\nбудние дни: 09:00 - 18:00', reply_markup=intwogis3())
+        bot.send_message(chat_id=cid, text='Отеделение банка\n\nРеспублика Казахсан, г.Алматы, ул. Шевченко, 155/6\nГрафик работы: будние дни: 09:00 - 18:00', reply_markup=intwogis3())
         bot.send_location(chat_id=cid, latitude=43.2437411, longitude=76.8999463)
     elif content == 'мкр. Жетысу-2, 70Б':
-        bot.send_message(chat_id=cid, text='Отеделение банка,\n\nРеспублика Казахсан, г.Алматы, мкр. Жетысу-2, 70Б\nГрафик работы:\nбудние дни: 09:00 - 18:00', reply_markup=intwogis4())
+        bot.send_message(chat_id=cid, text='Отеделение банка\n\nРеспублика Казахсан, г.Алматы, мкр. Жетысу-2, 70Б\nГрафик работы: будние дни: 09:00 - 18:00', reply_markup=intwogis4())
         bot.send_location(chat_id=cid, latitude=43.219273, longitude=76.846908)
     elif content == 'ул. Тулебаева, 15/18А':
-        bot.send_message(chat_id=cid, text='Отеделение банка,\n\nРеспублика Казахсан, г.Алматы, ул. Тулебаева, 15/18А\nГрафик работы:\nбудние дни: 09:00 - 18:00', reply_markup=intwogis5())
+        bot.send_message(chat_id=cid, text='Отеделение банка\n\nРеспублика Казахсан, г.Алматы, ул. Тулебаева, 15/18А\nГрафик работы: будние дни: 09:00 - 18:00', reply_markup=intwogis5())
         bot.send_location(chat_id=cid, latitude=43.26699, longitude=76.946132)
     elif content == 'Назад':
         send_back(msg)
@@ -159,7 +159,7 @@ def send_important(msg):
     if content == 'Всё о системе ЖС':
         bot.send_message(chat_id=cid, text='ВСЕ О СИСТЕМЕ ЖИЛСТРОЙСБЕРЕЖЕНИЙ\nУНИКАЛЬНЫЙ СПОСОБ ПОЛУЧИТЬ ИПОТЕЧНЫЙ КРЕДИТ ПО СТАВКЕ 5% И НИЖЕ!\n\nКАК ЭТО РАБОТАЕТ?\n1.Откройте депозит в Жилстройсбербанке\n2.Выполните всего три условия:\nкопите на депозите средства не менее трех лет\nнакопите половину необходимой вам суммы (50%)\nдостигните минимального уровня оценочного показателя (ОП)\n\nЕсли вы выполнили все три условия – вы получаете кредит, который называется жилищный займ, по ставке 5% годовых\n\nЕсли вы ПЕРЕвыполнили эти условия, то есть копили дольше – ставка по займу снижается (минимальная ставка 3,5%)\n\nНа сумму ваших накоплений ежегодно начисляется вознаграждение Банка и премия государства.\nЖилье на полученный кредит можно купить в любом городе страны., ВАМ ТАКЖЕ НЕОБХОДИМО ЗНАТЬ НЕСКОЛЬКО ВАЖНЫХ ТЕРМИНОВ СИСТЕМЫ ЖИЛСТРОЙСБЕРЕЖЕНИЙ:\nдоговорная сумма\nпремия государства\nоценочный показатель', reply_markup=prem())
     elif content == 'Жилищный заём':
-        bot.send_message(chat_id=cid, text='разработка')
+        bot.send_message(chat_id=cid, text='ВСЁ О ЖИЛИЩНОМ ЗАЁМЕ\nСтавка: от 3,5 до 5% годовых (годовая эффективная ставка от 4%)\nСумма: до 100 000 000 тенге\nЗалог: приобретаемое\n\nДЛЯ ТОГО ЧТОБЫ ПОЛУЧИТЬ САМЫЙ ВЫГОДНЫЙ КРЕДИТ, ВАМ НЕОБХОДИМО:\n1. Открыть депозит в Жилстройсбербанке\n\n2. Выполнить всего три условия:\n    ☑ копить на депозите средства не менее трех лет\n    ☑ накопить половину необходимой вам суммы (50%)\n   ☑ достичь минимального уровня оценочного показателя ОП-16\n\nЕсли вы ПЕРЕвыполнили эти условия, то есть копили дольше - ставка по займу снижается\n\nДругие преимущеста\n0% комиссии за рассмотрение кредитной заявки и организацию выдачи займа\nУпрощенная процедура подтверждения платежеспособности')
     elif content == 'Промежуточный заём':
         bot.send_message(chat_id=cid, text='разработка')
     elif content == 'Предварительный заём':
@@ -186,33 +186,35 @@ def send_convert(msg):
     elif content == '🇷🇺':
         sent4 = bot.send_message(chat_id=cid, text='Введите сумму')
         bot.register_next_step_handler(sent4, convRu)
+    elif content == 'Назад  ':
+        send_back(msg)
 
 def convKz(msg):
     cid = msg.chat.id
     content = msg.text
-    usdconvert = int(content)%float(valuty3['1 Доллар США'])
-    eurconvert = int(content)%float(valuty3['1 Евро'])
-    bot.send_message(chat_id=cid, text=content+'тенге= '+str(usdconvert)+'долларов США\n'+content+'тенге= '+str(eurconvert)+'евро')
+    usdconvert = int(content)/float(valuty3['1 Доллар США'])
+    eurconvert = int(content)/float(valuty3['1 Евро'])
+    bot.send_message(chat_id=cid, text=content+' тенге = '+str(usdconvert//1)+' долларов США\n'+content+' тенге = '+str(eurconvert//1)+' евро')
     #bot.send_message(chat_id=cid, text=str(usdconvert) +" " + str(eurconvert))
 def convUs(msg):
     cid = msg.chat.id
     content = msg.text
     kztconvert = int(content)*float(valuty3['1 Доллар США'])
-    eurconvert = int(content)%float(valuty3['1 Евро'])
-    bot.send_message(chat_id=cid, text=content+'долларов США= '+str(kztconvert)+'тенге\n'+content+'долларов США= '+str(eurconvert)+'евро')
+    eurconvert = int(content)*float(0.91)
+    bot.send_message(chat_id=cid, text=content+' долларов США = '+str(kztconvert//1)+' тенге\n'+content+' долларов США = '+str(eurconvert//1)+' евро')
     #bot.send_message(chat_id=cid, text=str(kztconvert) +" " + str(eurconvert))
 def convEu(msg):
     cid = msg.chat.id
     content = msg.text
     kztconvert = int(content)*float(valuty3['1 Евро'])
-    usdconvert = int(content)%float(valuty3['1 Евро'])
-    bot.send_message(chat_id=cid, text=content+'Евро= '+str(kztconvert)+'тенге\n'+content+'Евро= '+str(usdconvert)+'долларов США')
+    usdconvert = int(content)*float(1.10)
+    bot.send_message(chat_id=cid, text=content+' евро = '+str(kztconvert//1)+' тенге\n'+content+' евро = '+str(usdconvert//1)+' долларов США')
 def convRu(msg):
     cid = msg.chat.id
     content = msg.text
     kztconvert = int(content)*float(valuty3['1 Российский рубль'])
-    usdconvert = int(content)%float(valuty3['1 Российский рубль'])
-    bot.send_message(chat_id=cid, text=content+'рублей= '+str(kztconvert)+'тенге\n'+content+'рублей= '+str(usdconvert)+'долларов США')
+    usdconvert = int(content)*float(0.016)
+    bot.send_message(chat_id=cid, text=content+' рублей = '+str(kztconvert//1)+' тенге\n'+content+' рублей = '+str(usdconvert//1)+' долларов США')
 @bot.message_handler(content_types=['text'])
 def send_message1(msg):
     cid = msg.chat.id
@@ -223,9 +225,9 @@ def send_message1(msg):
     if content == 'Адреса и графики работ отделений':
         bot.send_message(chat_id=cid, text='Адреса и графики работ отделений', reply_markup=create_keyboard(adress))
     elif content == 'Контакты':
-        bot.send_message(chat_id=cid, text='+77273309300\n+77272793511\n+77273307590')
+        bot.send_message(chat_id=cid, text='+77273309300\n\n+77272793511\n\n+77273307590')
     elif content == 'Частые вопросы': 
-        bot.send_message(chat_id=cid, text='Выберите интерисующий вопрос:\n'+'1.Что такое Интернет-банк?\n'+'2.На какие цели могу я получить кредит?\n'+'3.С какого возраста можно открыть депозит?\n'+'4.Сколько стоит открыть кредит?\n'+'5.Могу ли получить арендное жильё?\n'+'6.Почему мне выгодно открыть депозит жилищных-строительных сбережений?\n'+'7.Сколько я должен накопить чтобы приобрести жильё?\n'+'8.Как я могу приобрести жильё?', reply_markup=inline())
+        bot.send_message(chat_id=cid, text='Выберите интересующий вопрос:\n'+'1.Что такое Интернет-банк?\n'+'2.На какие цели могу я получить кредит?\n'+'3.С какого возраста можно открыть депозит?\n'+'4.Сколько стоит открыть кредит?\n'+'5.Могу ли получить арендное жильё?\n'+'6.Почему мне выгодно открыть депозит жилищных-строительных сбережений?\n'+'7.Сколько я должен накопить чтобы приобрести жильё?\n'+'8.Как я могу приобрести жильё?', reply_markup=inline())
     elif content == 'Курс валют':
         bot.send_message(chat_id=cid, text='1 Доллар США'+'='+valuty3['1 Доллар США']+'\n1 Евро'+'='+valuty3['1 Евро']+'\n1 Российский рубль'+'='+valuty3['1 Российский рубль'])
     elif content == 'Самое важное':
