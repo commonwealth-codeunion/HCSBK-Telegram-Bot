@@ -194,27 +194,35 @@ def convKz(msg):
     content = msg.text
     usdconvert = int(content)/float(valuty3['1 Доллар США'])
     eurconvert = int(content)/float(valuty3['1 Евро'])
-    bot.send_message(chat_id=cid, text=content+' тенге = '+str(usdconvert//1)+' долларов США\n'+content+' тенге = '+str(eurconvert//1)+' евро')
-    #bot.send_message(chat_id=cid, text=str(usdconvert) +" " + str(eurconvert))
+    ruconvert =  int(content)/float(valuty3['1 Российский рубль'])
+    bot.send_message(chat_id=cid, text=content+' тенге = '+str(round(usdconvert, 2))+' долларов США\n'+content+' тенге = '+str(round(eurconvert, 2))+' евро\n'+content+' тенге = '+str(round(ruconvert, 2)) + 'Российских рублей')
 def convUs(msg):
     cid = msg.chat.id
     content = msg.text
+    chast = float(valuty3['1 Доллар США'])/float(valuty3['1 Евро'])
+    chast1 = float(valuty3['1 Доллар США'])/float(valuty3['1 Российский рубль'])
     kztconvert = int(content)*float(valuty3['1 Доллар США'])
-    eurconvert = int(content)*float(0.91)
-    bot.send_message(chat_id=cid, text=content+' долларов США = '+str(kztconvert//1)+' тенге\n'+content+' долларов США = '+str(eurconvert//1)+' евро')
-    #bot.send_message(chat_id=cid, text=str(kztconvert) +" " + str(eurconvert))
+    eurconvert = int(content)*float(chast)
+    ruconvert = int(content)*float(chast1)
+    bot.send_message(chat_id=cid, text=content+' долларов США = '+str(round(kztconvert, 2))+' тенге\n'+content+' долларов США = '+str(round(eurconvert, 2))+' евро\n'+content+' долларов США = '+str(round(ruconvert, 2))+' Российских рублей')
 def convEu(msg):
     cid = msg.chat.id
     content = msg.text
+    chast = float(valuty3['1 Евро'])/float(valuty3['1 Доллар США'])
+    chast1 = float(valuty3['1 Евро'])/float(valuty3['1 Российский рубль'])
     kztconvert = int(content)*float(valuty3['1 Евро'])
-    usdconvert = int(content)*float(1.10)
-    bot.send_message(chat_id=cid, text=content+' евро = '+str(kztconvert//1)+' тенге\n'+content+' евро = '+str(usdconvert//1)+' долларов США')
+    usdconvert = int(content)*float(chast)
+    ruconvert = int(content)*float(chast1)
+    bot.send_message(chat_id=cid, text=content+' евро = '+str(round(kztconvert, 2))+' тенге\n'+content+' евро = '+str(round(usdconvert, 2))+' долларов США\n'+content+' евро = '+str(round(ruconvert, 2))+' Российских рублей')
 def convRu(msg):
     cid = msg.chat.id
     content = msg.text
+    chast = float(valuty3['1 Российский рубль'])/float(valuty3['1 Доллар США'])
+    chast1 = float(valuty3['1 Российский рубль'])/float(valuty3['1 Евро'])
     kztconvert = int(content)*float(valuty3['1 Российский рубль'])
-    usdconvert = int(content)*float(0.016)
-    bot.send_message(chat_id=cid, text=content+' рублей = '+str(kztconvert//1)+' тенге\n'+content+' рублей = '+str(usdconvert//1)+' долларов США')
+    usdconvert = int(content)*float(chast)
+    eurconvert = int(content)*float(chast1)
+    bot.send_message(chat_id=cid, text=content+' рублей = '+str(round(kztconvert, 2))+' тенге\n'+content+' рублей = '+str(round(usdconvert, 2))+' долларов США\n'+content+' рублей = '+str(round(eurconvert, 2))+' Евро ')
 @bot.message_handler(content_types=['text'])
 def send_message1(msg):
     cid = msg.chat.id
