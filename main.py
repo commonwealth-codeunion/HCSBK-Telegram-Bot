@@ -1,5 +1,6 @@
-
-import telebot, requests, bs4
+import bs4
+import requests
+import telebot
 from telebot import types
 #импортировал библиотеку для парсинга, тк с тем сайтом не удобно работать
 linkval = 'https://prodengi.kz/currency/konverter_valyt/'
