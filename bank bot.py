@@ -37,7 +37,7 @@ for i in range(0, len(valuty2)):
 @bot.message_handler(commands=['start'])
 def send_message(msg):
     cid = msg.chat.id
-    bot.send_message(chat_id=cid, text='Здравствуйте!', reply_markup=create_keyboard(menu))
+    bot.send_message(chat_id=cid, text='Здравствуйте! Это телеграм-бот Жилстройсбербанка.', reply_markup=create_keyboard(menu))
 
 def send_back(msg):
     cid = msg.chat.id
