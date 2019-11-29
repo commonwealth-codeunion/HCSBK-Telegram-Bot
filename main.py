@@ -1,18 +1,8 @@
 
 import telebot, requests, bs4
 from telebot import types
-import json
 #импортировал библиотеку для парсинга, тк с тем сайтом не удобно работать
 linkval = 'https://prodengi.kz/currency/konverter_valyt/'
-linkweather = 'http://api.openweathermap.org/data/2.5/weather?q=almaty&units=metric&APPID=6bab4d6713adbf3a428b1f2a7454395d'
-
-dataweather = requests.get(linkweather)
-pogoda = dataweather.json()
-temp = pogoda['main']['temp']
-windd = pogoda['wind']['speed']
-countr = pogoda['sys']['country']
-vis = pogoda['visibility']
-main1 = pogoda['weather'][0]['main']
 
 data = requests.get(linkval)
 soup = bs4.BeautifulSoup(data.text, 'html.parser')
@@ -26,7 +16,7 @@ valuty1 = []
 valuty2 = []
 valuty3 = {}
 
-menu = ['Адреса и графики работ отделений', 'Контакты', 'Частые вопросы', 'Самое важное','Курс валют','Конвертация','Личный кабинет','ПОГОДА БЛЯТЬ']
+menu = ['Адреса и графики работ отделений', 'Контакты', 'Частые вопросы', 'Самое важное','Курс валют','Конвертация','Личный кабинет']
 adress = ['Центральный аппарат | пр-т. Абылай хана, 91', 'пр-т. Сейфуллина, 498', 'ул. Шевченко, 155/6', 'мкр. Жетысу-2, 70Б', 'ул. Тулебаева, 15/18А','Назад']
 important = ['Всё о системе ЖС', 'Жилищный заём', 'Промежуточный заём', 'Предварительный заём', 'Назад ']
 convert = ['🇰🇿','🇷🇺','🇺🇸','🇪🇺','Назад  ']
@@ -51,7 +41,7 @@ for i in range(0, len(valuty2)):
 @bot.message_handler(commands=['start']) #helloMessage
 def send_message(msg):
     cid = msg.chat.id
-    bot.send_message(chat_id=cid, text='Здравствуйте! Это телеграм-бот Жилстройсбербанка.\n\nКстати, температура в Алматы сейчас '+str(temp)+'°C', reply_markup=create_keyboard(menu))
+    bot.send_message(chat_id=cid, text='Здравствуйте! Это телеграм-бот Жилстройсбербанка.', reply_markup=create_keyboard(menu))
 
 def send_back(msg): #backFunction
     cid = msg.chat.id
@@ -72,19 +62,17 @@ def send_message1(msg):
     send_important(msg)
     send_convert(msg)
     if content == 'Адреса и графики работ отделений':
-        bot.send_message(chat_id=cid, text='Адреса и графики работ отделений\nКстати, температура в Алматы сейчас '+str(temp)+'°C', reply_markup=create_keyboard(adress))
+        bot.send_message(chat_id=cid, text='Адреса и графики работ отделений', reply_markup=create_keyboard(adress))
     elif content == 'Контакты':
-        bot.send_message(chat_id=cid, text='+77273309300\n\n+77272793511\n\n+77273307590\nКстати, температура в Алматы сейчас '+str(temp)+'°C')
+        bot.send_message(chat_id=cid, text='+77273309300\n\n+77272793511\n\n+77273307590')
     elif content == 'Частые вопросы': 
         bot.send_message(chat_id=cid, text='Выберите интересующий вопрос:\n'+'1.Что такое Интернет-банк?\n'+'2.На какие цели могу я получить кредит?\n'+'3.С какого возраста можно открыть депозит?\n'+'4.Сколько стоит открыть кредит?\n'+'5.Могу ли получить арендное жильё?\n'+'6.Почему мне выгодно открыть депозит жилищных-строительных сбережений?\n'+'7.Сколько я должен накопить чтобы приобрести жильё?\n'+'8.Как я могу приобрести жильё?', reply_markup=inline())
     elif content == 'Курс валют':
-        bot.send_message(chat_id=cid, text='1 Доллар США'+'='+valuty3['1 Доллар США']+'\n1 Евро'+'='+valuty3['1 Евро']+'\n1 Российский рубль'+'='+valuty3['1 Российский рубль']+'\nКстати, температура в Алматы сейчас '+str(temp)+'°C')
+        bot.send_message(chat_id=cid, text='1 Доллар США'+'='+valuty3['1 Доллар США']+'\n1 Евро'+'='+valuty3['1 Евро']+'\n1 Российский рубль'+'='+valuty3['1 Российский рубль'])
     elif content == 'Самое важное':
         bot.send_message(chat_id=cid, text='Самое важное', reply_markup=create_keyboard(important))
     elif content == 'Конвертация':
         bot.send_message(chat_id=cid, text='Выберите валюту', reply_markup=create_keyboard(convert))
-    elif content == 'ПОГОДА БЛЯТЬ':
-        bot.send_message(chat_id=cid, text='Температура в Алматы'+str(temp)+'°C\n'+'Тима чорт\n'+'Скорость ветра '+str(windd)+'м/с\n'+'Видимость '+str(vis)+'метров\n'+'Погода впринципе '+main1)
 #mainMenu
 
 #adress
@@ -230,7 +218,7 @@ def convKz(msg):
     usdconvert = int(content)/float(valuty3['1 Доллар США'])
     eurconvert = int(content)/float(valuty3['1 Евро'])
     ruconvert =  int(content)/float(valuty3['1 Российский рубль'])
-    bot.send_message(chat_id=cid, text=content+' тенге = '+str(round(usdconvert, 2))+' долларов США\n'+content+' тенге = '+str(round(eurconvert, 2))+' евро\n'+content+' тенге = '+str(round(ruconvert, 2)) + 'Российских рублей\nКстати, температура в Алматы сейчас '+str(temp)+'°C')
+    bot.send_message(chat_id=cid, text=content+' тенге = '+str(round(usdconvert, 2))+' долларов США\n'+content+' тенге = '+str(round(eurconvert, 2))+' евро\n'+content+' тенге = '+str(round(ruconvert, 2)))
 def convUs(msg):
     cid = msg.chat.id
     content = msg.text
@@ -239,7 +227,7 @@ def convUs(msg):
     kztconvert = int(content)*float(valuty3['1 Доллар США'])
     eurconvert = int(content)*float(chast)
     ruconvert = int(content)*float(chast1)
-    bot.send_message(chat_id=cid, text=content+' долларов США = '+str(round(kztconvert, 2))+' тенге\n'+content+' долларов США = '+str(round(eurconvert, 2))+' евро\n'+content+' долларов США = '+str(round(ruconvert, 2))+' Российских рублей\nКстати, температура в Алматы сейчас '+str(temp)+'°C')
+    bot.send_message(chat_id=cid, text=content+' долларов США = '+str(round(kztconvert, 2))+' тенге\n'+content+' долларов США = '+str(round(eurconvert, 2))+' евро\n'+content+' долларов США = '+str(round(ruconvert, 2)))
 def convEu(msg):
     cid = msg.chat.id
     content = msg.text
@@ -248,7 +236,7 @@ def convEu(msg):
     kztconvert = int(content)*float(valuty3['1 Евро'])
     usdconvert = int(content)*float(chast)
     ruconvert = int(content)*float(chast1)
-    bot.send_message(chat_id=cid, text=content+' евро = '+str(round(kztconvert, 2))+' тенге\n'+content+' евро = '+str(round(usdconvert, 2))+' долларов США\n'+content+' евро = '+str(round(ruconvert, 2))+' Российских рублей\nКстати, температура в Алматы сейчас '+str(temp)+'°C')
+    bot.send_message(chat_id=cid, text=content+' евро = '+str(round(kztconvert, 2))+' тенге\n'+content+' евро = '+str(round(usdconvert, 2))+' долларов США\n'+content+' евро = '+str(round(ruconvert, 2)))
 def convRu(msg):
     cid = msg.chat.id
     content = msg.text
@@ -257,7 +245,7 @@ def convRu(msg):
     kztconvert = int(content)*float(valuty3['1 Российский рубль'])
     usdconvert = int(content)*float(chast)
     eurconvert = int(content)*float(chast1)
-    bot.send_message(chat_id=cid, text=content+' рублей = '+str(round(kztconvert, 2))+' тенге\n'+content+' рублей = '+str(round(usdconvert, 2))+' долларов США\n'+content+' рублей = '+str(round(eurconvert, 2))+' Евро\nКстати, температура в Алматы сейчас '+str(temp)+'°C')
+    bot.send_message(chat_id=cid, text=content+' рублей = '+str(round(kztconvert, 2))+' тенге\n'+content+' рублей = '+str(round(usdconvert, 2))+' долларов США\n'+content+' рублей = '+str(round(eurconvert, 2)))
 #convertation
 
 #в словаре valuty3 сейчас есть практически все валюты, мб это нам пригодится
