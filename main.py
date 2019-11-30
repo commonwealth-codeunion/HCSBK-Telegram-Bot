@@ -21,6 +21,7 @@ menu = ['Адреса и графики работ отделений', 'Кон�
 adress = ['Центральный аппарат | пр-т. Абылай хана, 91', 'пр-т. Сейфуллина, 498', 'ул. Шевченко, 155/6', 'мкр. Жетысу-2, 70Б', 'ул. Тулебаева, 15/18А','Назад']
 important = ['Всё о системе ЖС', 'Жилищный заём', 'Промежуточный заём', 'Предварительный заём', 'Назад ']
 convert = ['🇰🇿','🇷🇺','🇺🇸','🇪🇺','Назад  ']
+cabinet = ['Информация', 'Настройки', 'Назад   ']
 
 val1 = soup.findAll('div', {'class': 'quant befor'})
 text1 = soup.findAll('p')
@@ -62,8 +63,9 @@ def send_message1(msg):
     send_adress1(msg)
     send_important(msg)
     send_convert(msg)
+    send_cab(msg)
     if content == 'Адреса и графики работ отделений':
-        bot.send_message(chat_id=cid, text='Адреса и графики работ отделений', reply_markup=create_keyboard(adress))
+        bot.send_message(chat_id=cid, text='Адреса и графики работ отделений.', reply_markup=create_keyboard(adress))
     elif content == 'Контакты':
         bot.send_message(chat_id=cid, text='+77273309300\n\n+77272793511\n\n+77273307590')
     elif content == 'Частые вопросы': 
@@ -71,9 +73,11 @@ def send_message1(msg):
     elif content == 'Курс валют':
         bot.send_message(chat_id=cid, text='1 Доллар США'+'='+valuty3['1 Доллар США']+'\n1 Евро'+'='+valuty3['1 Евро']+'\n1 Российский рубль'+'='+valuty3['1 Российский рубль'])
     elif content == 'Самое важное':
-        bot.send_message(chat_id=cid, text='Самое важное', reply_markup=create_keyboard(important))
+        bot.send_message(chat_id=cid, text='Самое важное.', reply_markup=create_keyboard(important))
     elif content == 'Конвертация':
-        bot.send_message(chat_id=cid, text='Выберите валюту', reply_markup=create_keyboard(convert))
+        bot.send_message(chat_id=cid, text='Выберите валюту.', reply_markup=create_keyboard(convert))
+    elif content == 'Личный кабинет':
+        bot.send_message(chat_id=cid, text='Личный кабинет.', reply_markup=create_keyboard(cabinet))
 #mainMenu
 
 #adress
@@ -248,6 +252,18 @@ def convRu(msg):
     eurconvert = int(content)*float(chast1)
     bot.send_message(chat_id=cid, text=content+' рублей = '+str(round(kztconvert, 2))+' тенге\n'+content+' рублей = '+str(round(usdconvert, 2))+' долларов США\n'+content+' рублей = '+str(round(eurconvert, 2)))
 #convertation
+
+#cabinet
+def send_cab(msg):
+    cid = msg.chat.id
+    content = msg.text
+    if content == 'Информация':
+        bot.send_message(chat_id=cid, text='Информация о профиле\n\nОгай Владислав Сергеевич\n\nСостояние займа №1\nСумма займа: 24 942 887 ₸\nСумма накоплений: 25 187 881 ₸\nСрок жилищного займа, мес.: 84\nСтавка в год: 4.8%\nПогашения по кредиту: 354 618.81 ₸/мес')
+    elif content == 'Настройки':
+        bot.send_message(chat_id=cid, text='pohui')
+    elif content == 'Назад   ':
+        send_back(msg)
+#cabinet
 
 #в словаре valuty3 сейчас есть практически все валюты, мб это нам пригодится
 
